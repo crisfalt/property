@@ -12,6 +12,7 @@ export default class UploadImages extends Component {
       visible: false,
       message: '',
       imageInfos: [],
+      id: window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1),
     };
 
      this.estateService = new InmuebleServices();
@@ -48,6 +49,13 @@ export default class UploadImages extends Component {
     }
 
     componentDidMount() {
+
+    if(this.state.id === 'create'){
+      this.setState({
+        currentFile: undefined,
+        previewImage: undefined,
+      })
+    }
   }
 
    onHide(name) {
