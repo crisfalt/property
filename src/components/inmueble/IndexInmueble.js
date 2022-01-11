@@ -13,10 +13,10 @@ import { Link } from 'react-router-dom';
 export var eliminarRegistro = function(id) {
     let estateService = new InmuebleServices();
     estateService.eliminarInmuebles(id).then(response => {
-          if(response.status === 200){
+          if(response.status){
              return alert(response.message)
           }else{
-              return alert(response.title)
+              return alert(response.message)
           }
     }); 
 };

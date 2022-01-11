@@ -74,7 +74,7 @@ class FormInmueble extends React.Component {
 
         this.estateService.guardarInmuebles(data, this.state.method, this.state.id).then(response => {
           if(response.status){
-             this.setState({message:response.message, visible:true });
+             this.setState({message:response.message + 'hea', visible:true });
           }
         })
     }
@@ -194,13 +194,13 @@ class FormInmueble extends React.Component {
                         </div>
                         <div className="p-col-6">
                             <div className="sizes">
-                               <Button type="submit" disabled={invalid} icon="pi pi-save" label="Guardar" className="p-button-info"></Button>
+                               <Button type="submit" disabled={invalid} icon="pi pi-save" label="Guardar" className="p-button-info p-shadow-5"></Button>
                                <Link style={{textDecoration: 'none'}}
                                     to={{
                                         pathname: "/",
                                         state: { fromDashboard: true }
                                 }}>
-                               <Button type="button" icon="pi pi-save" label="Cancelar" className="p-button-warning"></Button>
+                               <Button type="button" label="Cancelar" className="p-button-warning p-ml-2 p-shadow-5"></Button>
                                </Link>
                             </div>
                             
