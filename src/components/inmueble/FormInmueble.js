@@ -200,7 +200,7 @@ class FormInmueble extends React.Component {
                                         pathname: "/",
                                         state: { fromDashboard: true }
                                 }}>
-                               <Button type="button" disabled={invalid} icon="pi pi-save" label="Cancelar" className="p-button-warning"></Button>
+                               <Button type="button" icon="pi pi-save" label="Cancelar" className="p-button-warning"></Button>
                                </Link>
                             </div>
                             
