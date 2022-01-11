@@ -1,17 +1,17 @@
-import React from "react";
-import {InmuebleServices} from '../../services/InmuebleServices';
-import {Button} from "primereact/button";
-import {Card} from 'primereact/card';
-import {InputText} from 'primereact/inputtext';
+import React from "react"
+import {InmuebleServices} from '../../services/InmuebleServices'
+import {Button} from "primereact/button"
+import {Card} from 'primereact/card'
+import {InputText} from 'primereact/inputtext'
 import {
     FormBuilder,
     FieldGroup,
     FieldControl,
     Validators,
-} from "react-reactive-form";
-import UploadImages from "../inmueble/UploadFilesInmueble";
-import {Dialog} from 'primereact/dialog';
-import {Link} from 'react-router-dom';
+} from "react-reactive-form"
+import UploadImages from "../inmueble/UploadFilesInmueble"
+import {Dialog} from 'primereact/dialog'
+import {Link} from 'react-router-dom'
 
 const TextInput = ({handler, touched, hasError, meta}) => (
     <div>
@@ -33,10 +33,10 @@ class FormInmueble extends React.Component {
         Price: ["", Validators.required],
         CodeInternal: ["", Validators.required],
         Year: ["", Validators.required],
-    });
+    })
 
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             title: 'Editar',
             method: null,
@@ -44,15 +44,15 @@ class FormInmueble extends React.Component {
             message: '',
             id: window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1),
         }
-        this.estateService = new InmuebleServices();
+        this.estateService = new InmuebleServices()
     }
 
     handleReset = () => {
-        this.loginForm.reset();
+        this.loginForm.reset()
     }
     handleSubmit = (e) => {
-        e.preventDefault();
-        let data = null;
+        e.preventDefault()
+        let data = null
 
         if (this.state.method === 'PATCH') {
             data = [{
@@ -68,56 +68,56 @@ class FormInmueble extends React.Component {
                 CodeInternal: this.form.controls['CodeInternal'].value,
                 Year: this.form.controls['Year'].value,
                 OwnerId: 1
-            };
+            }
         }
 
         this.estateService.guardarInmuebles(data, this.state.method, this.state.id).then(response => {
             if (response.status) {
-                this.setState({message: response.message + 'hea', visible: true});
+                this.setState({message: response.message, visible: true})
             }
         })
     }
 
     async componentDidMount() {
-        await this.setState({title: this.state.id === 'create' ? 'Nuevo ' : 'Editar '});
-        await this.setState({method: this.state.id === 'create' ? 'POST' : 'PATCH'});
+        await this.setState({title: this.state.id === 'create' ? 'Nuevo ' : 'Editar '})
+        await this.setState({method: this.state.id === 'create' ? 'POST' : 'PATCH'})
         if (this.state.id !== 'create') {
-            this.form.controls['Name'].disable();
-            this.form.controls['Addres'].disable();
-            this.form.controls['CodeInternal'].disable();
-            this.form.controls['Year'].disable();
+            this.form.controls['Name'].disable()
+            this.form.controls['Addres'].disable()
+            this.form.controls['CodeInternal'].disable()
+            this.form.controls['Year'].disable()
         }
-        this.cargarDatos();
+        this.cargarDatos()
     }
 
     onHide(name) {
         this.setState({
             [`${name}`]: false
-        });
+        })
     }
 
     eliminarRegistro() {
         this.estateService.eliminarInmuebles(this.state.id).then(response => {
             if (response.status) {
-                this.setState({message: response.message, visible: true});
+                this.setState({message: response.message, visible: true})
             }
         })
     }
 
 
     cargarDatos() {
-        let data = JSON.parse(localStorage.getItem(this.state.id));
-
-        this.form.controls['Name'].setValue(data.name);
-        this.form.controls['Addres'].setValue(data.addres);
-        this.form.controls['CodeInternal'].setValue(data.codeInternal);
-        this.form.controls['Year'].setValue(data.year);
-        this.form.controls['Price'].setValue(data.price);
-
+        let data = JSON.parse(localStorage.getItem(this.state.id))
+        if ( data ) {
+            this.form.controls['Name'].setValue(data.name)
+            this.form.controls['Addres'].setValue(data.addres)
+            this.form.controls['CodeInternal'].setValue(data.codeInternal)
+            this.form.controls['Year'].setValue(data.year)
+            this.form.controls['Price'].setValue(data.price)
+        }
     }
 
     render() {
-        const {title, visible, message} = this.state;
+        const {title, visible, message} = this.state
         return <Card title={title + 'Inmueble'}>
 
             <Dialog header="Respuesta" visible={visible} onHide={() => this.onHide('visible')}
@@ -228,4 +228,4 @@ class FormInmueble extends React.Component {
     }
 }
 
-export default FormInmueble;
+export default FormInmueble
