@@ -119,7 +119,7 @@ class FormInmueble extends React.Component {
     
   render() {
     const { title, visible, message } = this.state;
-    return <Card title={title + 'Inmueble'} subTitle="React V17.0.2 + Primereact">
+    return <Card title={title + 'Inmueble'}>
 
       <Dialog header="Respuesta" visible={visible} onHide={() => this.onHide('visible')} breakpoints={{'700px': '75vw', '640px': '100vw'}} style={{width: '50vw'}}>
           {message}

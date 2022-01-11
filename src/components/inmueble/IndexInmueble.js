@@ -230,7 +230,7 @@ class IndexInmueble extends React.Component {
  
   render() {
     const filterHeader = this.renderHeaderFilters();
-    return <Card title="Listado de inmuebles" subTitle="React V17.0.2 + Primereact">
+    return <Card title="Listado de inmuebles">
             <div className="p-dir-col-rev">
                 <div className="p-col">
                     <div className="p-grid">
